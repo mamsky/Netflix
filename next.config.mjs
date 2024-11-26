@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["avatar.iran.liara.run", "image.tmdb.org"],
+    domains: ["avatar.iran.liara.run", "image.tmdb.org", "cdn.myanimelist.net"],
   },
 };
 

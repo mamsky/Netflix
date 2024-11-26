@@ -3,8 +3,10 @@ import Image from "next/image";
 import Logo from "../assets/logo.png";
 import { useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
-const Navbar = ({ children }) => {
+const Navbar = ({ children, pathname }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -18,36 +20,94 @@ const Navbar = ({ children }) => {
               <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center hover:cursor-pointer text-xs"
+                className="flex items-center hover:cursor-pointer text-md"
               >
                 Menu <IoMdArrowDropdown className="w-5 h-5" />
               </button>
               {isOpen && (
-                <div className="absolute bg-black p-2">
-                  <div className="text-[10px]">Awal</div>
-                  <div className="text-[10px]">Seri</div>
-                  <div className="text-[10px]">Film</div>
-                  <div className="text-[10px]">
-                    Berita yang paling banyak dilihat
+                <div className="absolute z-10 bg-black p-2 rounded-b-lg">
+                  <div className="my-1">
+                    <Link
+                      href="/Dashboard"
+                      className={`text-xs hover:cursor-pointer hover:scale-125 ${
+                        pathname == "/Dashboard"
+                          ? "text-yellow-100 text-md"
+                          : ""
+                      } `}
+                    >
+                      Awal
+                    </Link>
                   </div>
-                  <div className="text-[10px]">Telusuri berdasarkan bahasa</div>
+                  <div className="my-1">
+                    <Link
+                      href="/Series"
+                      className={`text-xs hover:cursor-pointer hover:scale-105 ${
+                        pathname == "/Series" ? "text-yellow-100 text-md" : ""
+                      } `}
+                    >
+                      Seri
+                    </Link>
+                  </div>
+                  <div className="my-1">
+                    <Link
+                      href="/Film"
+                      className={`text-xs hover:cursor-pointer hover:scale-105 ${
+                        pathname == "/Film" ? "text-yellow-100 text-md" : ""
+                      } `}
+                    >
+                      Film
+                    </Link>
+                  </div>
+                  <div className="my-1">
+                    <Link
+                      href="/Anime"
+                      className={`text-xs hover:cursor-pointer hover:scale-105 ${
+                        pathname == "/Anime" ? "text-yellow-100 text-md" : ""
+                      } `}
+                    >
+                      Anime
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
             {/* toogle end  */}
-            <div className="text-[10px] hidden md:block ">Awal</div>
-            <div className="text-[10px] hidden md:block">Seri</div>
-            <div className="text-[10px] hidden md:block">Film</div>
-            <div className="text-[10px] hidden md:block">
-              Berita yang paling banyak dilihat
-            </div>
-            <div className="text-[10px] hidden md:block">
-              Telusuri berdasarkan bahasa
-            </div>
+            <Link
+              href="/Dashboard"
+              className={`text-md hidden md:block hover:cursor-pointer hover:scale-125 ${
+                pathname == "/Dashboard" ? "text-yellow-100 text-lg" : ""
+              } `}
+            >
+              Awal
+            </Link>
+            <Link
+              href="/Series"
+              className={`text-md hidden md:block hover:cursor-pointer hover:scale-125 ${
+                pathname == "/Series" ? "text-yellow-100 text-lg" : ""
+              } `}
+            >
+              Series
+            </Link>
+            <Link
+              href="/Film"
+              className={`text-md hidden md:block hover:cursor-pointer hover:scale-125 ${
+                pathname == "/Film" ? "text-yellow-100 text-lg" : ""
+              } `}
+            >
+              Film
+            </Link>
+            <Link
+              href="/Anime"
+              className={`text-md hidden md:block hover:cursor-pointer hover:scale-125 ${
+                pathname == "/Anime" ? "text-yellow-100 text-lg" : ""
+              } `}
+            >
+              Anime
+            </Link>
           </div>
           <div className="ml-10 gap-4 flex items-center">
-            <div className="text-[10px]">Search</div>
-            <div className="text-[10px]">Profile</div>
+            <div className="text-md">Search</div>
+            <div className="text-md">Profile</div>
           </div>
         </div>
       </div>
