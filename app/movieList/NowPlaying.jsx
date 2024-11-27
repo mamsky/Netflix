@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import ListMovie from "./ListMovie";
 import axios from "axios";
+import Skeleton from "../Skeleton/page";
 const NowPlaying = () => {
   const [data, setData] = useState([]);
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
@@ -22,9 +23,13 @@ const NowPlaying = () => {
     <div className="p-2">
       <div className="text-xl md:text-4xl font-bold font-sans p-2">
         <h1>Now Playing</h1>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
-          <ListMovie data={data} />
-        </div>
+        {data == "" ? (
+          <Skeleton />
+        ) : (
+          <div className="grid grid-cols-4 md:grid-cols-8">
+            <ListMovie data={data} />
+          </div>
+        )}
       </div>
     </div>
   );

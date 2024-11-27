@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import MovieList from "../movieList/page";
 import { usePathname } from "next/navigation";
+import JsonData from "../../json/placehold.json";
+import { CiImageOn } from "react-icons/ci";
 
 const App = () => {
   const pathName = usePathname();
@@ -79,20 +81,40 @@ const App = () => {
                   8 film terpopuler saat ini di Indonesia
                 </h1>
                 <div className=" grid grid-cols-4 sm:grid-cols-8 gap-2">
-                  {data.map((field) => (
-                    <div
-                      key={field.id}
-                      className="transition ease-in-out duration-300 hover:scale-150 hover:cursor-pointer"
-                    >
-                      <Image
-                        width={250}
-                        height={300}
-                        className="w-14 h-18 md:w-24 md:h-32 rounded-md"
-                        src={process.env.NEXT_PUBLIC_IMAGE + field.poster_path}
-                        alt="foto"
-                      />
-                    </div>
-                  ))}
+                  {data == "" ? (
+                    <>
+                      {JsonData.data.map((f) => (
+                        <div key={f.id}>
+                          <div className="animate-pulse text-black">
+                            <CiImageOn
+                              width={250}
+                              height={300}
+                              className="w-14 h-18 md:w-24 md:h-32 rounded-md"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      {data.map((field) => (
+                        <div
+                          key={field.id}
+                          className="transition ease-in-out duration-300 hover:scale-150 hover:cursor-pointer"
+                        >
+                          <Image
+                            width={250}
+                            height={300}
+                            className="w-14 h-18 md:w-24 md:h-32 rounded-md"
+                            src={
+                              process.env.NEXT_PUBLIC_IMAGE + field.poster_path
+                            }
+                            alt="foto"
+                          />
+                        </div>
+                      ))}
+                    </>
+                  )}
                 </div>
               </div>
             </div>

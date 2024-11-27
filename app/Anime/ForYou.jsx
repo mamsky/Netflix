@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ReusableListAnime from "./ReusableListAnime";
+import Skeleton from "../Skeleton/page";
 
 const ForYou = () => {
   const [data, setData] = useState([]);
@@ -9,11 +10,13 @@ const ForYou = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await axios
-        .get(`${baseUrl}/top/anime?type=movie&filter=bypopularity&limit=8`)
-        .then((res) => {
-          setData(res.data.data);
+      try {
+        await axios.get(`${baseUrl}/top/anime?rating=pg13`).then((res) => {
+          setData(res.data.data.slice(0, 8));
         });
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchData();
   }, []);
@@ -22,9 +25,13 @@ const ForYou = () => {
     <>
       <div className="p-2 text-xl md:text-4xl font-bold font-sans">
         <h1>Anime For You</h1>
-        <div className="grid grid-cols-4 md:grid-cols-8 gap-2 p-2">
-          <ReusableListAnime data={data} />
-        </div>
+        {data == "" ? (
+          <Skeleton />
+        ) : (
+          <div className="grid grid-cols-4 md:grid-cols-8 gap-2 p-2">
+            <ReusableListAnime data={data} />
+          </div>
+        )}
       </div>
     </>
   );

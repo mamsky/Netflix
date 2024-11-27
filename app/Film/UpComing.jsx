@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import ReusableListMovie from "./ReusableListMovie";
 import axios from "axios";
+import Skeleton from "../Skeleton/page";
 const UpComing = () => {
   const [data, setData] = useState([]);
 
@@ -25,9 +26,13 @@ const UpComing = () => {
   return (
     <div className="p-2 text-xl md:text-4xl font-bold font-sans">
       <h1>Upcoming</h1>
-      <div className="grid grid-cols-4 md:grid-cols-8">
-        <ReusableListMovie data={data} />
-      </div>
+      {data == "" ? (
+        <Skeleton />
+      ) : (
+        <div className="grid grid-cols-4 md:grid-cols-8">
+          <ReusableListMovie data={data} />
+        </div>
+      )}
     </div>
   );
 };

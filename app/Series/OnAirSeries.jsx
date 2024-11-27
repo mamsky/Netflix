@@ -2,6 +2,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ReusableListMovie from "./ReusableListMovie";
+import Skeleton from "../Skeleton/page";
 
 const OnAirSeries = () => {
   const [data, setData] = useState([]);
@@ -22,9 +23,13 @@ const OnAirSeries = () => {
   return (
     <div className="p-4 text-xl md:text-4xl font-bold font-sans">
       <h1>On Air Series</h1>
-      <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
-        <ReusableListMovie data={data} />
-      </div>
+      {data == "" ? (
+        <Skeleton />
+      ) : (
+        <div className="grid grid-cols-4 md:grid-cols-8">
+          <ReusableListMovie data={data} />
+        </div>
+      )}
     </div>
   );
 };
