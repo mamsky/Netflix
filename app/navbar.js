@@ -1,13 +1,23 @@
 "use client";
 import Image from "next/image";
 import Logo from "../assets/logo.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Search } from "./Search/page";
+import { redirect } from "next/navigation";
 
 const Navbar = ({ children, pathname }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState("Search");
+  const [input, setInput] = useState({
+    search: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    redirect(`/Search?search=${input.search}`);
+  };
 
   return (
     <>
@@ -106,7 +116,40 @@ const Navbar = ({ children, pathname }) => {
             </Link>
           </div>
           <div className="ml-10 gap-4 flex items-center">
-            <div className="text-md">Search</div>
+            {search == "iSearch" ? (
+              <div className="relative">
+                <form onSubmit={handleSubmit}>
+                  <input
+                    onChange={(e) =>
+                      setInput({ ...input, search: e.target.value })
+                    }
+                    type="text"
+                    required
+                    placeholder="Search.."
+                    className="text-black px-2 rounded-md"
+                  />
+                  <button
+                    type="submit"
+                    className="absolute  text-white hover:bg-blue-800 right-6 mx-0.5 px-1 bg-blue-600 rounded-l-md"
+                  >
+                    Search
+                  </button>
+                  <button
+                    onClick={() => setSearch("Search")}
+                    className="absolute  text-black right-0 bg-red-500 px-2 rounded-sm"
+                  >
+                    X
+                  </button>
+                </form>
+              </div>
+            ) : (
+              <button
+                onClick={() => setSearch("iSearch")}
+                className="text-md hover:cursor-pointer"
+              >
+                Search
+              </button>
+            )}
             <div className="text-md">Profile</div>
           </div>
         </div>
