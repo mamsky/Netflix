@@ -1,3 +1,4 @@
+import Footer from "../footer";
 import NowPlaying from "./NowPlaying";
 import Popular from "./Popular";
 import TopRated from "./TopRated";
@@ -23,6 +24,7 @@ const ListMovie = () => {
             <TopRated />
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

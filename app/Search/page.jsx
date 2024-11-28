@@ -4,6 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Navbar from "../navbar";
 import axios, { all } from "axios";
 import Image from "next/image";
+import Footer from "../footer";
 const Page = () => {
   const pathName = usePathname();
   const searchParams = useSearchParams();
@@ -24,6 +25,9 @@ const Page = () => {
       )
       .then((res) => {
         setData(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
       });
     await axios
       .get(
@@ -32,6 +36,9 @@ const Page = () => {
       .then((res) => {
         allData.push(res.data.results);
         setData1(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
       });
     await axios
       .get(
@@ -40,6 +47,9 @@ const Page = () => {
       .then((res) => {
         allData.push(res.data.results);
         setData2(res.data.results);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -71,14 +81,12 @@ const Page = () => {
           </div>
         ) : (
           dataArr.map((fields, i) => (
-            <div key={i} className="bg-gray-800 rounded-md p-0.5 text-white">
+            <div
+              key={i}
+              className="bg-gray-800 rounded-md p-0.5 text-white transition hover:scale-125 duration-300"
+            >
               <Image
-                src={
-                  // fields.poster_path == ""
-                  //   ? imageUrl + fields.backdrop_path
-                  //   :
-                  imageUrl + fields.poster_path
-                }
+                src={imageUrl + fields.poster_path}
                 width={300}
                 height={250}
                 alt="Missing"
@@ -88,6 +96,7 @@ const Page = () => {
           ))
         )}
       </div>
+      <Footer />
     </div>
   );
 };

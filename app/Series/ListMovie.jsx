@@ -1,3 +1,4 @@
+import Footer from "../footer";
 import AiringToday from "./AiringToday";
 import OnAirSeries from "./OnAirSeries";
 import PopularSeries from "./PopularSeries";
@@ -22,6 +23,7 @@ const ListMovie = () => {
             <TopRated />
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );

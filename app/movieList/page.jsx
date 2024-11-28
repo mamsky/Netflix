@@ -2,6 +2,7 @@ import PopularMovie from "./popular";
 import NowPlaying from "./NowPlaying";
 import TopRated from "./TopRated";
 import UpComing from "./UpComing";
+import Footer from "../footer";
 
 const movieList = () => {
   return (
@@ -22,6 +23,7 @@ const movieList = () => {
           <UpComing />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

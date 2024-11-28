@@ -1,3 +1,4 @@
+import Footer from "../footer";
 import ForYou from "./ForYou";
 import TopAnime from "./TopAnime";
 import TopReview from "./TopReview";
@@ -19,6 +20,7 @@ const ListAnime = () => {
             <TopReview />
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
